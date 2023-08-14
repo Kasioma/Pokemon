@@ -3,3 +3,4 @@ node_modules/
 a.js
 models/
 db/seeddb.js
+.env
