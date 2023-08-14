@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expedition page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/7838bcaa72.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/expedition/styles.css" />
+  </head>
+  <body class="dark">
+    <!-- NAV BAR SO UK WDF UR DOING BAKA! -->
+    <nav id="nav-bar">
+      <div id="profile-picture">
+        <img class="pfp" src="/dashboard/basic.png" />
+      </div>
+      <div id="username" class="icons">
+        <h1><%= user.nickname %></h1>
+      </div>
+      <div id="settings">
+        <div class="dropdown">
+          <button
+            id="settings-button"
+            onmouseover="changeClass()"
+            onmouseout="changeBack()"
+            onclick="openMenu()"
+          >
+            <i id="gear" class="fa fa-gear icons" style="font-size: 26px"></i>
+          </button>
+          <div id="myDropdown" class="dropdown-content">
+            <button id="light" class="menu">Light Mode</button>
+            <button id="dark" class="menu">Dark Mode</button>
+          </div>
+        </div>
+        <form action="/logout" method="POST">
+          <button id="log-out-button">
+            <i class="fa fa-sign-out icons" style="font-size: 26px"></i>
+          </button>
+        </form>
+      </div>
+      <div class="clickable">
+        <p class="gen icons" id="inv">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-pokeball"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="9" cy="9" r="9" transform="translate(3 3)" />
+            <circle cx="12" cy="12" r="3" />
+            <path d="M3 12h6m6 0h6" />
+          </svg>
+          <span>Inventory Section</span>
+        </p>
+        <div id="inventory-section">
+          <ul>
+            <li>
+              <form method="get" action="/">
+                <button id="mons" class="icons">Pokemon Inventory</button>
+              </form>
+            </li>
+            <li>
+              <button id="items" class="icons">Item Inventory</button>
+            </li>
+          </ul>
+        </div>
+        <p class="gen icons" id="game">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-pokeball"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="9" cy="9" r="9" transform="translate(3 3)" />
+            <circle cx="12" cy="12" r="3" />
+            <path d="M3 12h6m6 0h6" />
+          </svg>
+          Game Section
+        </p>
+        <div id="game-section">
+          <ul>
+            <li>
+              <button id="mons" class="icons">
+                <i id="mon" class="fa fa-angle-double-right"></i> Expedition
+              </button>
+            </li>
+            <li>
+              <form method="get" action="/roulette">
+                <button id="items" class="icons">Roulette</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="balance">
+        <h2>
+          Balance:
+          <span id="balance">$<%=currentBalance.pokecash %></span>
+        </h2>
+      </div>
+    </nav>
+    <!-- END OF NAV BAR -->
+    <div class="tab">
+      <div class="img-container">
+        <button
+          class="zones location-one"
+          style="left: 114px; top: 400px; background-color: brown"
+        ></button>
+        <button
+          class="zones location-two"
+          style="left: 114px; top: 297px; background-color: red"
+        ></button>
+        <button
+          class="zones location-three"
+          style="left: 114px; top: 126px; background-color: purple"
+        ></button>
+        <button
+          class="zones location-four"
+          style="left: 388px; top: 92px; background-color: yellow"
+        ></button>
+        <button
+          class="zones location-five"
+          style="left: 388px; top: 195px; background-color: green"
+        ></button>
+        <button
+          class="zones location-six"
+          style="left: 388px; top: 332px; background-color: blue"
+        ></button>
+        <button
+          class="zones location-seven"
+          style="left: 285px; top: 195px; background-color: aqua"
+        ></button>
+        <button
+          class="zones location-eight"
+          style="left: 525px; top: 195px; background-color: magenta"
+        ></button>
+        <button
+          class="zones location-nine"
+          style="left: 320px; top: 469px; background-color: crimson"
+        ></button>
+        <button
+          class="zones location-ten"
+          style="left: 114px; top: 538px; background-color: goldenrod"
+        ></button>
+        <button
+          class="zones location-eleven"
+          style="left: 46px; top: 92px"
+        ></button>
+        <img src="/expedition/map.jpg" alt="map" class="map" />
+      </div>
+      <div class="selected">
+        <div class="slot">
+          <img src="" alt="" class="invisible" />
+        </div>
+        <div class="slot">
+          <img src="" alt="" class="invisible" />
+        </div>
+        <div class="slot">
+          <img src="" alt="" class="invisible" />
+        </div>
+        <button class="explore">Explore</button>
+      </div>
+      <div class="container">
+        <div id="inventory" class="inventory">
+          <% pages.forEach(mon => { %> <% if(mon.empty) { %>
+          <div class="slot"></div>
+          <% } else { %>
+          <div class="slot">
+            <img
+              src="<%= mon.icon %>"
+              class="monster"
+              alt="<%= mon.name %>'s icon"
+              data-info="<%= mon.id %>"
+            />
+          </div>
+          <% }}) %>
+        </div>
+      </div>
+    </div>
+    <script src="/expedition/script.js"></script>
+  </body>
+</html>
+<!-- 
+  zones criteria:
+  -> zone 1: at least one pokemon above or level 5
+  -> zone 2: at least one pokemon above or level 10
+  -> zone 3: at least one pokemon above or level 20
+  ->zone 4: at least one pokemon above or level 30
+  ->zone 5: all pokemons must be evolved at least once if possible (evo 2)
+  ->zone 6: at least one pokemon above or level 40
+  ->zone 7: at least one pokemon above or level 50
+  ->zone 8: all pokemons must be evolved to max stage if possible (evo 3)
+  ->zone 9: at least one pokemon above or level 60
+  ->zone 10: at least one pokemon above or level 70
+  ->zone 11: must include at least one legendary/mythical pokemon to explore this region
+ -->

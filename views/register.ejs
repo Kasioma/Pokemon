@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/register/styles.css" />
+    <title>Register Form</title>
+  </head>
+  <body>
+    <div id="quadran">
+      <div id="horizontal-line"></div>
+      <div id="vertical-line"></div>
+      <div id="login" class="hover-underline-animation">
+        <h1><a href="/login">Login</a></h1>
+      </div>
+      <div id="register" class="hover-underline-animation">
+        <h1><a href="/register">Register</a></h1>
+      </div>
+      <form id="log-form" action="/register" method="POST">
+        <i id="person" class="fa-solid fa-lg fa-address-card"></i>
+        <input
+          name="name"
+          id="nickname"
+          type="text"
+          placeholder="nickname"
+          required
+        />
+        <input
+          name="email"
+          id="mail"
+          type="email"
+          placeholder="example@something.com"
+          required
+        />
+        <i id="envelope" class="fa-solid fa-lg fa-envelope"></i>
+        <input
+          name="password"
+          id="password"
+          type="password"
+          placeholder="password"
+          required
+        />
+        <i id="padlock" class="fa-solid fa-lg fa-lock"></i>
+        <input
+          name="passwordRepeat"
+          id="password-repeat"
+          type="password"
+          placeholder="password"
+          required
+        />
+        <i id="padlock-2" class="fa-solid fa-lg fa-lock"></i>
+        <button id="log-button" type="submit">Register</button>
+      </form>
+    </div>
+    <script src="../public/register/register.js"></script>
+  </body>
+</html>

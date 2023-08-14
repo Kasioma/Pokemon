@@ -1,3 +1,5 @@
 node_modules/
 .vscode/
 a.js
+models/
+db/seeddb.js

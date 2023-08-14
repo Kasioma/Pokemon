@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/login/styles.css" />
+    <title>Log-in Form</title>
+  </head>
+  <% if(messages.error){ %> <%= messages.error %> <% } %>
+  <body>
+    <div id="quadran">
+      <div id="horizontal-line"></div>
+      <div id="vertical-line"></div>
+      <div id="login" class="hover-underline-animation">
+        <h1><a href="/login">Login</a></h1>
+      </div>
+      <div id="register" class="hover-underline-animation">
+        <h1><a href="/register">Register</a></h1>
+      </div>
+      <form id="log-form" action="/login" method="POST">
+        <input
+          name="email"
+          id="mail"
+          type="email"
+          placeholder="example@something.com"
+          required
+        />
+        <i id="envelope" class="fa-solid fa-lg fa-envelope"></i>
+        <input
+          name="password"
+          id="password"
+          type="password"
+          placeholder="password"
+          required
+        />
+        <i id="padlock" class="fa-solid fa-lg fa-lock"></i>
+        <button id="log-button" type="submit">Login</button>
+      </form>
+    </div>
+    <script src="../public/login/login.js"></script>
+  </body>
+</html>
