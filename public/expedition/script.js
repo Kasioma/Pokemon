@@ -13,6 +13,7 @@ let locationTen = document.querySelector(".location-ten");
 let locationEleven = document.querySelector(".location-eleven");
 document.addEventListener("DOMContentLoaded", async function () {
   await fetchMons();
+  timer();
   console.log(data);
 });
 
@@ -260,6 +261,30 @@ locationEleven.addEventListener("click", async function () {
   console.log(page);
   relocateInventory(page);
 });
+
+const container = document.querySelector(".img-container");
+
+function timer() {
+  const zones = document.querySelectorAll(".zones");
+  zones.forEach((zone) => {
+    zone.addEventListener("mouseover", () => {
+      const containerRect = container.getBoundingClientRect();
+      const zoneRect = zone.getBoundingClientRect();
+
+      const middleX = (zoneRect.left + zoneRect.right) / 2 - containerRect.left;
+      const middleY = (zoneRect.top + zoneRect.bottom) / 2 - containerRect.top;
+
+      document.querySelector(".timer").style.top = middleY + 10 + "px";
+      document.querySelector(".timer").style.left = middleX - 10 + "px";
+
+      document.querySelector(".timer").style.opacity = 1;
+    });
+
+    zone.addEventListener("mouseout", () => {
+      document.querySelector(".timer").style.opacity = 0;
+    });
+  });
+}
 
 async function fetchMons() {
   const response = await fetch("http://localhost:3000/expedition/?", {

@@ -327,3 +327,31 @@ li {
   left: 60px;
   top: 92px;
 }
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid beige;
+  opacity: 0.8;
+}
+.actual-text {
+  width: 100%;
+  height: 50%;
+  background-color: beige;
+  opacity: 0.8;
+  border-radius: 10px;
+}
+.timer {
+  top: 50%;
+  left: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  transition: 500ms ease-in-out;
+  opacity: 0;
+}
