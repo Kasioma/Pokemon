@@ -352,6 +352,25 @@ li {
   width: 100px;
   height: 100px;
   position: absolute;
-  transition: 500ms ease-in-out;
   opacity: 0;
+}
+.number-of-expeditions {
+  color: var(--test);
+  font-size: small;
+  max-width: 85px;
+}
+.interactive-elements {
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+.explore {
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 2px var(--test);
+  color: var(--test);
+}
+.explore:hover {
+  opacity: 0.8;
 }

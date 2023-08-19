@@ -11,6 +11,11 @@ let locationEight = document.querySelector(".location-eight");
 let locationNine = document.querySelector(".location-nine");
 let locationTen = document.querySelector(".location-ten");
 let locationEleven = document.querySelector(".location-eleven");
+const adventurers = document
+  .querySelector(".selected")
+  .querySelectorAll(".slot");
+
+let selected = [];
 document.addEventListener("DOMContentLoaded", async function () {
   await fetchMons();
   timer();
@@ -18,6 +23,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 function relocateInventory(page) {
+  selected = [];
+  adventurers.forEach((elements) => {
+    elements.innerHTML = "";
+  });
   const inventory = document.getElementById("inventory");
   if (inventory) {
     inventory.remove();
@@ -40,6 +49,7 @@ function relocateInventory(page) {
     replacement.appendChild(div);
   });
   container.appendChild(replacement);
+  clickedNumber();
 }
 
 locationOne.addEventListener("click", async function () {
@@ -278,10 +288,54 @@ function timer() {
       document.querySelector(".timer").style.left = middleX - 10 + "px";
 
       document.querySelector(".timer").style.opacity = 1;
+      document.querySelector(".timer").style.transition = "500ms ease-in-out";
     });
 
     zone.addEventListener("mouseout", () => {
       document.querySelector(".timer").style.opacity = 0;
+    });
+  });
+}
+
+function clickedNumber() {
+  const inv = document.querySelectorAll(".slot");
+  inv.forEach((div, index) => {
+    div.addEventListener("click", () => {
+      if (div.innerHTML.trim() != "" && index >= 3) {
+        const id = div.querySelector("img").getAttribute("data-info");
+        if (
+          selected.includes(div.querySelector("img").getAttribute("data-info"))
+        ) {
+          const indexToDelete = selected.indexOf(
+            div.querySelector("img").getAttribute("data-info")
+          );
+          selected.splice(indexToDelete, 1);
+          adventurers.forEach((element) => {
+            if (
+              element.innerHTML != "" &&
+              element.querySelector("img").getAttribute("data-info") == id
+            ) {
+              element.innerHTML = "";
+            }
+          });
+        } else if (selected.length <= 2) {
+          let flag = false;
+          selected.push(div.querySelector("img").getAttribute("data-info"));
+          adventurers.forEach((element) => {
+            if (!flag) {
+              console.log(element);
+              if (element.innerHTML === "") {
+                const temp = document.createElement("img");
+                temp.setAttribute("data-info", id);
+                temp.src = div.querySelector("img").getAttribute("src");
+                element.appendChild(temp);
+                flag = true;
+              }
+            }
+          });
+        }
+        console.log(selected);
+      }
     });
   });
 }
