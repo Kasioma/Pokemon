@@ -1,4 +1,4 @@
-## Gatchamon
+# Gatchamon
 
 Gatchamon 
 
@@ -10,34 +10,58 @@ Not all the monsters' stats have been added to the database, can be addressed la
 
 ## Project ScreenShots
 
-#Loggin Screen
+### Loggin Screen
 
 ![Project Screenshot](https://github.com/Kasioma/Pokemon/blob/main/ScreenShots/loggin%20screen.png)
 
-#Register Screen
+### Register Screen
 
 ![Project Screenshot](https://github.com/Kasioma/Pokemon/blob/main/ScreenShots/register%20screen.png)
 
-#Main Dashboard
+### Main Dashboard
 
 ![Project Screenshot](https://github.com/Kasioma/Pokemon/blob/main/ScreenShots/main%20dashboard.png)
 
-#Evolution page
+### Evolution page
 
 ![Project Screenshot](https://github.com/Kasioma/Pokemon/blob/main/ScreenShots/evolution%20page.png)
 
-#Expedition page
+### Expedition page
 
 ![Project Screenshot](https://github.com/Kasioma/Pokemon/blob/main/ScreenShots/expedition%20page.png)
 
-#Roulette page
+### Roulette page
 
 ![Project Screenshot](https://github.com/Kasioma/Pokemon/blob/main/ScreenShots/roulette%20page.png)
 
-#Settings page
+### Settings page
 
 ![Project Screenshot](https://github.com/Kasioma/Pokemon/blob/main/ScreenShots/settings%20page.png)
 
 ## Installation and Setup Instructions
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.
+### Prerequisites
+
+- node.js
+- npm
+
+### Installation
+
+1. Clone the repo
+
+   ```sh
+   git clone https://github.com/Kasioma/Pokemon.git
+   cd Pokemon
+   ```
+
+2. Install the dependencies
+
+   ```sh
+   npm install
+   ```
+
+3. Start the development server
+
+   ```sh
+   npm run devStart
+   ```
