@@ -48,19 +48,6 @@ body {
   transition: background 500ms ease-in-out, color 1000ms ease-in-out;
 }
 /*Color and theme css*/
-.light {
-  background: var(--light);
-  background-image: conic-gradient(
-    from 0deg at 50% 50%,
-    var(--poworple),
-    var(--browown),
-    var(--browown),
-    var(--poworple)
-  );
-  background-blend-mode: multiply;
-  color: black;
-}
-
 .dark {
   background: var(--dark);
   background-image: conic-gradient(
@@ -150,111 +137,13 @@ li {
   margin-top: 5%;
   margin-bottom: 5%;
 }
-
-@media screen and (max-width: 270px) {
-  #nav-bar {
-    width: 100%;
-  }
-  .clickable {
-    display: none;
-  }
-  .tab {
-    display: none !important;
-  }
-}
-
-@media screen and (min-width: 270px) and (max-width: 500px) {
-  #nav-bar {
-    width: 100%;
-  }
-  .clickable {
-    width: 220px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-  }
-  .tab {
-    display: none !important;
-  }
-}
-
-@media screen and (min-width: 500px) {
-  #nav-bar {
-    width: 55%;
-  }
-  .tab {
-    margin-left: 65% !important;
-  }
-}
-
-@media screen and (min-width: 600px) and (max-width: 700px) {
-  #nav-bar {
-    width: 45%;
-  }
-  .tab {
-    margin-left: 55% !important;
-  }
-}
-@media screen and (min-width: 700px) and (max-width: 1000px) {
-  #nav-bar {
-    width: 40%;
-  }
-  .tab {
-    margin-left: 45% !important;
-  }
-}
-@media screen and (min-width: 1000px) {
-  #nav-bar {
-    width: 26%;
-  }
-  .tab {
-    margin-left: 35% !important;
-  }
-}
-@media screen and (min-width: 1200px) {
-  #nav-bar {
-    width: 20%;
-  }
-  .tab {
-    margin-left: 25% !important;
-  }
-}
 #settings {
   display: flex;
 }
 /* navbar ends */
-/* dropdown */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 95px;
-  min-height: 30px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.menu {
-  color: black;
-  padding: 20px 16px;
-  text-decoration: none;
-  display: block;
-}
-.menu:hover {
-  background-color: #ddd;
-}
-.empty {
-  color: transparent;
-  background-color: transparent;
-}
-
-.show {
-  display: block;
-}
-/* dropdown ends */
 .balance {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   color: var(--test);
   width: 70%;
@@ -295,6 +184,7 @@ li {
   grid-template-columns: 85px 85px;
 }
 .slot {
+  position: relative;
   width: 85px;
   height: 85px;
   background-color: hsl(236, 15%, 21%);
@@ -338,6 +228,9 @@ li {
 .actual-text {
   width: 100%;
   height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: beige;
   opacity: 0.8;
   border-radius: 10px;
@@ -373,4 +266,98 @@ li {
 }
 .explore:hover {
   opacity: 0.8;
+}
+.number-of-expeditions {
+  text-align: center;
+}
+.fa-clock {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  opacity: 0;
+}
+.invisible {
+  display: none;
+}
+.progress {
+  position: absolute;
+  left: 4px;
+  top: 65px;
+  background: #9cbab4;
+  width: 90%;
+  height: 15%;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: -1;
+}
+.progress_fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--test);
+  border-radius: 10px;
+}
+.progress_text {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  font-size: small;
+  font-weight: bold;
+  color: black;
+}
+.level {
+  position: absolute;
+  z-index: 1;
+  width: 15px;
+  height: 15px;
+  color: var(--test);
+  left: 5px;
+}
+.model {
+  z-index: -1;
+  left: 70px;
+  top: 150px;
+  position: absolute;
+  background-color: hsl(236, 15%, 21%);
+  width: 50%;
+  height: 50%;
+  border-radius: 20px;
+  color: var(--test);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  transition: 200ms ease-in-out;
+}
+.bal {
+  position: absolute;
+}
+.opa {
+  opacity: 0;
+}
+.help {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.help__list {
+  left: 40px;
+  border-radius: 10px;
+  top: 10px;
+  position: absolute;
+  font-size: 12px;
+  background: beige;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  z-index: 3;
+}
+.opac {
+  opacity: 0;
+  z-index: -1;
+}
+img {
+  object-fit: cover;
 }

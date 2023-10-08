@@ -25,18 +25,15 @@
       </div>
       <div id="settings">
         <div class="dropdown">
-          <button
-            id="settings-button"
-            onmouseover="changeClass()"
-            onmouseout="changeBack()"
-            onclick="openMenu()"
-          >
-            <i id="gear" class="fa fa-gear icons" style="font-size: 26px"></i>
-          </button>
-          <div id="myDropdown" class="dropdown-content">
-            <button id="light" class="menu">Light Mode</button>
-            <button id="dark" class="menu">Dark Mode</button>
-          </div>
+          <form action="/settings" method="GET">
+            <button
+              id="settings-button"
+              onmouseover="changeClass()"
+              onmouseout="changeBack()"
+            >
+              <i id="gear" class="fa fa-gear icons" style="font-size: 26px"></i>
+            </button>
+          </form>
         </div>
         <form action="/logout" method="POST">
           <button id="log-out-button">
@@ -73,7 +70,9 @@
               </form>
             </li>
             <li>
-              <button id="items" class="icons">Item Inventory</button>
+              <form method="GET" action="/evolution">
+                <button id="items" class="icons">Evolution</button>
+              </form>
             </li>
           </ul>
         </div>
@@ -113,14 +112,50 @@
         </div>
       </div>
       <div class="balance">
-        <h2>
-          Balance:
-          <span id="balance">$<%=currentBalance.pokecash %></span>
-        </h2>
+        <div class="currency">
+          <h2 class="bal">
+            Balance:
+            <span id="balance">$<%=currentBalance.pokecash %></span>
+          </h2>
+          <h2 class="dust opa">
+            Dust: <span id="dust">✧ <%=currentDust.pokedust%></span>
+          </h2>
+        </div>
+        <button id="switch" class="switch">
+          <i class="fa-solid fa-arrows-spin" style="font-size: 24px"></i>
+        </button>
       </div>
     </nav>
     <!-- END OF NAV BAR -->
     <div class="tab">
+      <button id="help" class="help">
+        <i class="fa-solid fa-question pos" style="font-size: 24px"></i>
+      </button>
+      <div class="help__list opac">
+        <h2>Zones criteria:</h2>
+        <ul>
+          <li>zone 1: at least one pokemon above or level 5</li>
+          <li>zone 2: at least one pokemon above or level 10</li>
+          <li>zone 3: at least one pokemon above or level 20</li>
+          <li>zone 4: at least one pokemon above or level 30</li>
+          <li>
+            zone 5: all pokemons must be evolved at least once if possible (evo
+            2)
+          </li>
+          <li>zone 6: at least one pokemon above or level 40</li>
+          <li>zone 7: at least one pokemon above or level 50</li>
+          <li>
+            zone 8: all pokemons must be evolved to max stage if possible (evo
+            3)
+          </li>
+          <li>zone 9: at least one pokemon above or level 60</li>
+          <li>zone 10: at least one pokemon above or level 70</li>
+          <li>
+            zone 11: must include at least one legendary/mythical pokemon to
+            explore this region
+          </li>
+        </ul>
+      </div>
       <div class="img-container">
         <button
           class="zones location-one"
@@ -169,21 +204,35 @@
         <img src="/expedition/map.jpg" alt="map" class="map" />
         <div class="timer">
           <div class="triangle"></div>
-          <div class="actual-text"></div>
+          <div class="actual-text">
+            <span id="time"></span>
+          </div>
+        </div>
+        <div class="model">
+          <h2 class="money">Money found: <span id="found"></span></h2>
+          <h2 class="dusty">Dust found: <span id="dusty"></span></h2>
         </div>
       </div>
       <div class="interactive-elements">
         <div class="number-of-expeditions">
           <h2>
-            Expeditions:<br /><span id="number-of-expeditions-left"></span>
+            Teams:<br /><span id="number-of-expeditions-left"
+              ><%=expeditions[0].expeditions%> / 3</span
+            >
           </h2>
         </div>
         <div class="selected">
-          <div class="slot"></div>
+          <div class="slot">
+            <div class="progress">
+              <div class="progress_fill"></div>
+              <span class="progress_text">0%</span>
+            </div>
+          </div>
           <div class="slot"></div>
           <div class="slot"></div>
         </div>
-        <button class="explore">Explore</button>
+        <button id="explore" class="explore">Explore</button>
+        <button id="collect" class="explore invisible">Collect</button>
       </div>
       <div class="container">
         <div id="inventory" class="inventory">
@@ -191,18 +240,30 @@
           <div class="slot"></div>
           <% } else { %>
           <div class="slot">
+            <i class="fa-regular fa-clock"></i>
             <img
               src="<%= mon.icon %>"
               class="monster"
               alt="<%= mon.name %>'s icon"
               data-info="<%= mon.id %>"
             />
+            <span class="level"><%= mon.level %></span>
           </div>
           <% }}) %>
         </div>
       </div>
     </div>
     <script src="/expedition/script.js"></script>
+    <script>
+      const found = "<%= found %>";
+      console.log(found);
+      let src = "/dashboard/basic.png";
+      if (found === "true") {
+        src = "/images/" + "<%= user.id %>" + ".png";
+      }
+      console.log(src);
+      document.querySelector(".pfp").setAttribute("src", src);
+    </script>
   </body>
 </html>
 <!-- 

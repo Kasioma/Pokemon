@@ -4,6 +4,14 @@ function rand(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+const body = document.body;
+function changeClass() {
+  document.getElementById("gear").className = "fa fa-gear fa-spin icons";
+}
+function changeBack() {
+  document.getElementById("gear").className = "fa fa-gear icons";
+}
+
 function disable() {
   inv.disabled = true;
   sell.disabled = true;
@@ -203,6 +211,20 @@ async function deleteElementShiny() {
     "Congratulations, you won a SHINY " +
     divs[chosenMon - 1].querySelector("img").alt;
 }
+
+const sw = document.getElementById("switch");
+sw.addEventListener("click", () => {
+  const bal = document.querySelector(".bal");
+  const dust = document.querySelector(".dust");
+
+  if (dust.classList.contains("opa")) {
+    bal.classList.add("opa");
+    dust.classList.remove("opa");
+  } else {
+    bal.classList.remove("opa");
+    dust.classList.add("opa");
+  }
+});
 
 async function fetchMon(obj) {
   if (obj[0].icon == undefined) return;

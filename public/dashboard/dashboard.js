@@ -1,54 +1,39 @@
 const body = document.body;
-
+let dataToSend = {
+  mons: [],
+  sell: false,
+  confirm: false,
+  form: false,
+};
+let data = {
+  stats: [],
+  muni: 0,
+  percentage: 0,
+};
 function changeClass() {
-  if (body.classList.contains("light")) {
-    document.getElementById("gear").className = "fa fa-gear fa-spin icons";
-  } else document.getElementById("gear").className = "fa fa-gear fa-spin icons";
+  document.getElementById("gear").className = "fa fa-gear fa-spin icons";
 }
 function changeBack() {
-  if (body.classList.contains("light")) {
-    document.getElementById("gear").className = "fa fa-gear icons";
-  } else document.getElementById("gear").className = "fa fa-gear icons";
+  document.getElementById("gear").className = "fa fa-gear icons";
 }
-function openMenu() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-window.onclick = function (event) {
-  if (!event.target.matches("#gear")) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
+let divs = [];
+document.addEventListener("DOMContentLoaded", async () => {
+  dataToSend.form = true;
+  await fetchData(dataToSend);
+  const inv = data;
+  console.log(inv);
+  if (inv.length > 0) {
+    inv.forEach((element) => {
+      const div = document.querySelector(
+        `img[data-info="${element.id}"]`
+      ).parentElement;
+      if (div != undefined) {
+        div.querySelector("i").style.opacity = 1;
+        divs.push(div);
       }
-    }
+    });
   }
-};
-
-const darkButton = document.getElementById("dark");
-const lightButton = document.getElementById("light");
-
-darkButton.onclick = () => {
-  document.querySelectorAll(".light").forEach((element) => {
-    element.classList.replace("light", "dark");
-  });
-  document.getElementById("gear").className = "fa fa-gear icons";
-};
-
-lightButton.onclick = () => {
-  document.querySelectorAll(".dark").forEach((element) => {
-    element.classList.replace("dark", "light");
-  });
-  document.getElementById("gear").className = "fa fa-gear icons";
-  document
-    .getElementById("inv")
-    .classList.replace("text-color", "text-color-2");
-  document
-    .getElementById("game")
-    .classList.replace("text-color", "text-color-2");
-};
+});
 
 const backBtn = document.getElementById("back");
 const forwardBtn = document.getElementById("forward");
@@ -111,15 +96,7 @@ if (gridSlot) {
 
 const images = document.querySelectorAll(".slot img");
 const icon = document.querySelector(".clicked i");
-let dataToSend = {
-  mons: [],
-  sell: false,
-  confirm: false,
-};
-let data = {
-  stats: [],
-  muni: 0,
-};
+
 let clicked;
 images.forEach(function (image) {
   image.addEventListener("mouseover", function (e) {
@@ -167,15 +144,19 @@ images.forEach(function (image) {
     else {
       dataToSend.confirm = false;
       dataToSend.sell = false;
+      dataToSend.form = false;
       dataToSend.mons = dataToSend.mons.splice(dataToSend.mons.length - 1);
       await fetchData(dataToSend);
+      document.querySelector(".progress_fill").style.width =
+        data.percentage + "%";
+      document.querySelector(".progress_text").innerHTML =
+        data.percentage + "%";
       console.log(data);
       chart.data.datasets[0].data = data.stats;
       chart.update();
     }
   });
 });
-
 const card = document.querySelector(".clicked");
 
 document.addEventListener("mousemove", (e) => {
@@ -206,11 +187,13 @@ let balance = document.getElementById("balance").innerHTML;
 balance = parseFloat(balance.slice(1, balance.length));
 let sel = false;
 sell.addEventListener("click", async function () {
+  let toCheck = [];
   if (sel === true) {
     dataToSend.mons = [];
     const selectors = document.querySelectorAll("input[type=checkbox]:checked");
     selectors.forEach((checkbox) => {
       let element = checkbox.parentNode.parentNode;
+      toCheck.push(element);
       const obj = {
         img: element.querySelector("img").getAttribute("src"),
         id: element.querySelector("img").getAttribute("data-info"),
@@ -225,15 +208,26 @@ sell.addEventListener("click", async function () {
       id: clicked.getAttribute("data-info"),
     };
     dataToSend.mons.push(obj);
+    toCheck.push(clicked.parentElement);
   }
-  dataToSend.sell = true;
-  dataToSend.confirm = false;
-  await fetchData(dataToSend);
-  document.getElementById("ammount").innerHTML = "($" + data.muni + ")";
-  console.log(document.getElementById("showed").getAttribute("src"));
-  if (document.getElementById("showed").getAttribute("src") != "") {
-    document.getElementById("model").classList.toggle("active");
-    document.getElementById("overlay").classList.toggle("active");
+  if (dataToSend.mons.length === 1) toCheck.push(clicked.parentElement);
+  let ok = false;
+  toCheck.forEach((div) => {
+    if (divs.includes(div)) ok = true;
+  });
+  if (ok === true) {
+    alert("pokemon is busy!!");
+  } else {
+    dataToSend.sell = true;
+    dataToSend.confirm = false;
+    dataToSend.form = false;
+    await fetchData(dataToSend);
+    document.getElementById("ammount").innerHTML = "($" + data.muni + ")";
+    console.log(document.getElementById("showed").getAttribute("src"));
+    if (document.getElementById("showed").getAttribute("src") != "") {
+      document.getElementById("model").classList.toggle("active");
+      document.getElementById("overlay").classList.toggle("active");
+    }
   }
 });
 
@@ -243,11 +237,26 @@ cancel.addEventListener("click", function () {
   dataToSend.mons = [];
 });
 
+const sw = document.getElementById("switch");
+sw.addEventListener("click", () => {
+  const bal = document.querySelector(".bal");
+  const dust = document.querySelector(".dust");
+
+  if (dust.classList.contains("opa")) {
+    bal.classList.add("opa");
+    dust.classList.remove("opa");
+  } else {
+    bal.classList.remove("opa");
+    dust.classList.add("opa");
+  }
+});
+
 confirm.addEventListener("click", async function () {
   document.getElementById("model").classList.toggle("active");
   document.getElementById("overlay").classList.toggle("active");
   dataToSend.confirm = true;
   dataToSend.sell = false;
+  dataToSend.form = false;
   balance += parseFloat(data.muni);
   document.getElementById("balance").innerHTML = "$" + balance;
   document.getElementById("showed").classList.add("inactive");

@@ -420,7 +420,17 @@ img {
 }
 .balance {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   color: var(--test);
   width: 70%;
+}
+.bal {
+  position: absolute;
+}
+.opa {
+  opacity: 0;
+}
+img {
+  object-fit: cover;
 }

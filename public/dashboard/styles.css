@@ -48,19 +48,6 @@ body {
   transition: background 500ms ease-in-out, color 1000ms ease-in-out;
 }
 /*Color and theme css*/
-.light {
-  background: var(--light);
-  background-image: conic-gradient(
-    from 0deg at 50% 50%,
-    var(--poworple),
-    var(--browown),
-    var(--browown),
-    var(--poworple)
-  );
-  background-blend-mode: multiply;
-  color: black;
-}
-
 .dark {
   background: var(--dark);
   background-image: conic-gradient(
@@ -223,36 +210,6 @@ li {
   display: flex;
 }
 /* navbar ends */
-/* dropdown */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 95px;
-  min-height: 30px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.menu {
-  color: black;
-  padding: 20px 16px;
-  text-decoration: none;
-  display: block;
-}
-.menu:hover {
-  background-color: #ddd;
-}
-.empty {
-  color: transparent;
-  background-color: transparent;
-}
-
-.show {
-  display: block;
-}
-/* dropdown ends */
 /* inventory set up */
 .tab {
   background-color: hsl(221, 44%, 7%);
@@ -392,9 +349,16 @@ img.monster {
 /* chart ends */
 .balance {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   color: var(--test);
   width: 70%;
+}
+.bal {
+  position: absolute;
+}
+.opa {
+  opacity: 0;
 }
 .checkbox {
   position: absolute;
@@ -439,17 +403,17 @@ img.monster {
   width: 0;
 }
 .sell {
+  width: 6%;
   font-size: 16px;
   color: var(--test);
   position: absolute;
   border-radius: 5px;
   border: solid 1px var(--test);
-  left: 518px;
+  left: 520px;
   top: 45%;
 }
 .all {
   top: 50%;
-  left: 510px;
 }
 #model {
   position: fixed;
@@ -492,4 +456,47 @@ img.monster {
 #overlay.active {
   opacity: 1;
   pointer-events: all;
+}
+.progress {
+  position: absolute;
+  left: 450px;
+  top: 25%;
+  background: #9cbab4;
+  width: 20%;
+  height: 5%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.progress_fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--test);
+  border-radius: 10px;
+  transition: width ease-in-out 1s;
+}
+.progress_text {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  font-size: small;
+  font-weight: bold;
+  color: black;
+}
+.level {
+  position: absolute;
+  z-index: 1;
+  width: 15px;
+  height: 15px;
+  color: var(--test);
+  left: 5px;
+}
+.fa-clock {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  opacity: 0;
+}
+img {
+  object-fit: cover;
 }

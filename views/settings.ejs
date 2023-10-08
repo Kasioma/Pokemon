@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/7838bcaa72.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Settings</title>
+    <link rel="stylesheet" href="/settings/styles.css" />
+  </head>
+  <body class="dark">
+    <nav id="nav-bar">
+      <div id="profile-picture">
+        <img class="pfp" src="" />
+      </div>
+      <div id="username" class="icons">
+        <h1 id="nickname"><%= user.nickname %></h1>
+      </div>
+      <div id="settings">
+        <div class="dropdown">
+          <button id="settings-button">
+            <i id="gear" class="fa fa-gear icons" style="font-size: 26px"></i>
+          </button>
+        </div>
+        <form action="/logout" method="POST">
+          <button id="log-out-button">
+            <i class="fa fa-sign-out icons" style="font-size: 26px"></i>
+          </button>
+        </form>
+      </div>
+      <div class="clickable">
+        <p class="gen icons" id="inv">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-pokeball"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="9" cy="9" r="9" transform="translate(3 3)" />
+            <circle cx="12" cy="12" r="3" />
+            <path d="M3 12h6m6 0h6" />
+          </svg>
+          <span>Inventory Section</span>
+        </p>
+        <div id="inventory-section">
+          <ul>
+            <li>
+              <form method="get" action="/">
+                <button id="mons" class="icons">Pokemon Inventory</button>
+              </form>
+            </li>
+            <li>
+              <form method="GET" action="/evolution">
+                <button id="items" class="icons">Evolution</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+        <p class="gen icons" id="game">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-pokeball"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="9" cy="9" r="9" transform="translate(3 3)" />
+            <circle cx="12" cy="12" r="3" />
+            <path d="M3 12h6m6 0h6" />
+          </svg>
+          Game Section
+        </p>
+        <div id="game-section">
+          <ul>
+            <li>
+              <form action="/expedition" method="get">
+                <button id="mons" class="icons">Expedition</button>
+              </form>
+            </li>
+            <li>
+              <form method="get" action="/roulette">
+                <button id="items" class="icons">Roulette</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="balance">
+        <div class="currency">
+          <h2 class="bal">
+            Balance:
+            <span id="balance">$<%=currentBalance.pokecash %></span>
+          </h2>
+          <h2 class="dust opa">
+            Dust: <span id="dust">✧ <%=currentDust.pokedust%></span>
+          </h2>
+        </div>
+        <button id="switch" class="switch">
+          <i class="fa-solid fa-arrows-spin" style="font-size: 24px"></i>
+        </button>
+      </div>
+    </nav>
+    <!-- END OF NAV BAR -->
+    <div class="tab">
+      <div class="row__one">
+        <div class="profile__img">
+          <img src="/dashboard/basic.png" alt="" class="avatar__rounded" />
+          <img
+            src="https://auth-statics.operacdn.com/img/108064e9f5402e4e2a6c.svg"
+            alt=""
+            class="change"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row__two">
+          <h2>About you</h2>
+          <section id="name__section">
+            <h3>Username</h3>
+            <div class="field__one">
+              <div class="initial__state">
+                <p class="left"><%= user.nickname %></p>
+                <div id="changeName" class="right change__button">Change</div>
+              </div>
+              <div class="invisible changed__state">
+                <div class="input__container left">
+                  <input
+                    type="text"
+                    placeholder="<%= user.nickname %>"
+                    class="name__input"
+                  />
+                </div>
+                <div class="confirmation">
+                  <div id="confirm" class="confirm">Confirm</div>
+                  <div id="cancel" class="change__button">Cancel</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="uid__section">
+            <div class="field__one">
+              <p class="left">UID: <%= user.id %></p>
+            </div>
+          </section>
+        </div>
+        <div class="row__two">
+          <h2>Login options</h2>
+          <section id="mail__section">
+            <h3>Email</h3>
+            <div class="field__one">
+              <div class="initial__state">
+                <p id="page__mail" class="left"><%= user.email %></p>
+                <div id="mailChange" class="right change__button">Change</div>
+              </div>
+            </div>
+          </section>
+          <section id="password__section">
+            <h3>Password</h3>
+            <div class="field__one">
+              <div class="initial__state">
+                <p class="left">
+                  Set a unique password to protect your account!
+                </p>
+                <div id="passwordChange" class="right change__button">
+                  Change
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="model__pfp model"></div>
+    <div class="model__logging">
+      <div class="model__header">
+        <h3 class="header__text">Please confirm you password to continue</h3>
+        <div class="model__close">&times;</div>
+      </div>
+      <div class="model__content">
+        <input id="mail" type="email" value="<%= user.email  %>" />
+        <div class="password__container">
+          <input id="password" type="password" />
+          <i id="loggin__icon" class="fa-regular fa-eye hidden"></i>
+        </div>
+        <div id="confirmLoggin" class="confirm confirm__hidden">Confirm</div>
+        <div id="confirmLogginPassword" class="confirm confirm__hidden">
+          Confirm
+        </div>
+      </div>
+    </div>
+    <div class="model__mail">
+      <div class="model__header">
+        <h3 class="header__text">Introduce new email</h3>
+        <div id="close__mail" class="model__close__mail">&times;</div>
+      </div>
+      <div class="model__content">
+        <input id="email" type="email" placeholder="example@example" />
+        <input type="email" id="email__repeat" placeholder="example@example" />
+        <div id="confirmMail" class="confirm">Confirm</div>
+      </div>
+    </div>
+    <div class="model__password">
+      <div class="model__header">
+        <h3 class="header__text">Introduce new password</h3>
+        <div id="close__password" class="model__close__mail">&times;</div>
+      </div>
+      <div class="model__content">
+        <div class="password__container">
+          <input id="password__change" type="password" />
+          <i id="new__icon" class="fa-regular fa-eye hidden"></i>
+        </div>
+        <div class="password__container">
+          <input id="password__change__repeat" type="password" />
+          <i id="repeat__icon" class="fa-regular fa-eye hidden"></i>
+        </div>
+        <div id="confirmPassword" class="confirm">Confirm</div>
+      </div>
+    </div>
+    <div id="imageModal" class="model__image">
+      <div class="model__header">
+        <h3 class="header__text">Change your profile picture</h3>
+        <div id="close__picture" class="model__close__picture">&times;</div>
+      </div>
+      <div class="model__content__image">
+        <div class="circle__with__camera">
+          <img
+            id="camera"
+            src="https://auth-statics.operacdn.com/img/8cba4362d2168881d072.png"
+            alt="picture"
+          />
+          <img id="selectedImage" src="" alt="" class="new__image invisible" />
+        </div>
+        <div class="selection__content">
+          <label for="newPicture" class="secondary__button"
+            >Select a photo</label
+          >
+          <input
+            id="newPicture"
+            type="file"
+            name="profile__pic"
+            accept="image/*"
+          />
+        </div>
+        <div class="hint__container">
+          <p class="text">
+            Maximum file size is 6MB. Allowed file types are .png and .jpg
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="overlay"></div>
+    <script>
+      const found = "<%= found %>";
+      console.log(found);
+      let src = "/dashboard/basic.png";
+      if (found === "true") {
+        src = "/images/" + "<%= user.id %>" + ".png";
+      }
+      console.log(src);
+      document.querySelector(".pfp").setAttribute("src", src);
+      document.querySelector(".avatar__rounded").setAttribute("src", src);
+    </script>
+    <script src="/settings/script.js"></script>
+  </body>
+</html>

@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
@@ -12,9 +11,8 @@
       src="https://kit.fontawesome.com/7838bcaa72.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.1.1/dist/chart.umd.min.js"></script>
-    <link rel="stylesheet" href="/dashboard/styles.css" />
-    <title>Dashboard</title>
+    <link rel="stylesheet" href="/evolution/styles.css" />
+    <title>Evolution page</title>
   </head>
   <body class="dark">
     <!-- NAV BAR SO UK WDF UR DOING BAKA! -->
@@ -67,15 +65,15 @@
         <div id="inventory-section">
           <ul>
             <li>
-              <button id="mons" class="icons">
-                <i id="mon" class="fa fa-angle-double-right"></i> Pokemon
-                Inventory
-              </button>
+              <form method="get" action="/">
+                <button id="mons" class="icons">Pokemon Inventory</button>
+              </form>
             </li>
             <li>
-              <form method="GET" action="/evolution">
-                <button id="items" class="icons">Evolution</button>
-              </form>
+              <form method="GET" action="/evolution"></form>
+              <button id="items" class="icons">
+                <i id="mon" class="fa fa-angle-double-right"></i> Evolution
+              </button>
             </li>
           </ul>
         </div>
@@ -130,96 +128,115 @@
       </div>
     </nav>
     <!-- END OF NAV BAR -->
-    <!-- START OF INVENTORY MONS-->
-    <div id="mons-inv" class="tab">
-      <button id="sell" class="sell">Sell</button>
-      <div class="progress">
-        <div class="progress_fill"></div>
-        <span class="progress_text">0%</span>
+    <div class="tab">
+      <div class="header">
+        <div class="left">
+          <button class="buwuton evo" id="evolve">Evolve</button>
+          <button class="buwuton select" id="select">Select</button>
+          <button class="buwuton reset" id="reset">Reset</button>
+        </div>
+        <div class="right">
+          <input class="search__bar" type="text" placeholder="Search. . ." />
+        </div>
       </div>
-      <button id="select-to-sell" class="sell all">Select</button>
-      <% pages.forEach(page => { %>
-      <div class="pg grid inactive">
-        <% page.forEach(mon => { %> <% if(mon.empty) { %>
-        <div class="slot no-change"></div>
-        <% } else { %>
-        <div class="slot no-change">
-          <i class="fa-regular fa-clock"></i>
-          <span class="level"><%= mon.level %></span>
-          <img
-            src="<%= mon.icon %>"
-            class="monster"
-            alt="<%= mon.name %>'s icon"
-            data-info="<%= mon.id %>"
-          />
-          <div class="checkbox invisible">
-            <input type="checkbox" class="check invisible" id="check2" />
-            <label for="check2" class="label">
-              <svg
-                width="25"
-                height="25"
-                viewbox="0 0 100 100"
-                class="svgs invisible"
-              >
-                <g transform="translate(0,-952.36222)">
-                  <path
-                    d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4 "
-                    stroke="black"
-                    stroke-width="3"
-                    fill="none"
-                    class="path1"
-                  />
-                </g>
-              </svg>
-            </label>
+      <div class="lower__elements">
+        <div class="summon__circle">
+          <div class="top__zone">
+            <img src="/evolution/incubator.jpg" alt="circle" />
+            <div id="to-evolve" class="slot"></div>
+          </div>
+          <div class="bottom__zone">
+            <img src="/evolution/incubator.jpg" alt="circle" />
+            <img src="/evolution/incubator.jpg" alt="circle" />
+            <img src="/evolution/incubator.jpg" alt="circle" />
+            <div class="slot material material__one"></div>
+            <div class="slot material material__two"></div>
+            <div class="slot material material__three"></div>
+          </div>
+          <div class="arrow one">
+            <i class="fa-solid fa-arrow-up fa-5x"> </i>
+            <div class="background__one">
+              <div class="fill__one"></div>
+            </div>
+          </div>
+          <div class="arrow two">
+            <i class="fa-solid fa-arrow-up fa-5x"> </i>
+            <div class="background__two">
+              <div class="fill__two"></div>
+            </div>
+          </div>
+          <div class="arrow three">
+            <i class="fa-solid fa-arrow-up fa-5x"> </i>
+            <div class="background__three">
+              <div class="fill__three"></div>
+            </div>
+          </div>
+          <div class="arrow two">
+            <i class="fa-solid fa-arrow-up fa-5x"></i>
+          </div>
+          <div class="arrow three">
+            <i class="fa-solid fa-arrow-up fa-5x"></i>
           </div>
         </div>
-        <% }}) %>
-      </div>
-      <% }) %>
-      <div id="footer">
-        <button id="back">
-          <i
-            id="backB"
-            class="fa-solid fa-caret-left"
-            style="font-size: 28px"
-          ></i>
-        </button>
-        <a id="pg-nr" class="counter icons" style="font-size: 28px">1</a>
-        <button id="forward">
-          <i
-            id="forwardB"
-            class="fa-solid fa-caret-right"
-            style="font-size: 28px"
-          ></i>
-        </button>
-      </div>
-      <div id="bmon" class="clicked">
-        <i class="fa-solid fa-question active"></i>
-        <img id="showed" class="inactive" src="" />
-      </div>
-      <div class="chart">
-        <canvas id="statsChart"></canvas>
+        <div class="container">
+          <div class="all__pages">
+            <% pages.forEach(page =>{ %>
+            <div id="inventory" class="inventory inactive">
+              <% page.forEach(mon =>{ %> <% if(mon.empty){ %>
+              <div class="slot"></div>
+              <% } else {%>
+              <div class="slot">
+                <i class="fa-regular fa-clock"></i>
+                <img
+                  src="<%= mon.icon %>"
+                  class="monster"
+                  alt="<%= mon.name %>'s icon"
+                  data-info="<%= mon.id %>"
+                />
+                <span class="level"><%= mon.level %></span>
+              </div>
+              <% }}) %>
+            </div>
+            <% }) %>
+          </div>
+          <div class="footer">
+            <div class="page__management">
+              <button id="back">
+                <i
+                  id="backB"
+                  class="fa-solid fa-caret-left"
+                  style="font-size: 28px"
+                ></i>
+              </button>
+              <a id="pg-nr" class="counter icons" style="font-size: 28px">1</a>
+              <button id="forward">
+                <i
+                  id="forwardB"
+                  class="fa-solid fa-caret-right"
+                  style="font-size: 28px"
+                ></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div id="model">
       <h3>
-        Are you sure you want to sell this for <br /><span id="ammount"
-          >($?)</span
-        >
+        Evolving this mon will cost <span id="ammount"></span><br />
+        p.s. the materials used will be consumed!
       </h3>
       <button id="confirm">Confirm</button>
       <button id="cancel">Cancel</button>
     </div>
     <div id="overlay" class=""></div>
-    <!-- END OF INVENTORY MONS-->
+    <script src="/evolution/script.js"></script>
     <script>
-      const numPages = parseInt("<%= pages.length%>");
+      let numPages = parseInt("<%= pages.length%>");
     </script>
-    <script src="/dashboard/dashboard.js"></script>
     <script>
       document
-        .querySelector(".pg.grid")
+        .querySelector(".inventory")
         .classList.replace("inactive", "active-mons");
     </script>
     <script>

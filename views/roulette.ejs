@@ -25,15 +25,17 @@
       </div>
       <div id="settings">
         <div class="dropdown">
-          <button
-            id="settings-button"
-            onmouseover="changeClass()"
-            onmouseout="changeBack()"
-            onclick="openMenu()"
-            class="btn"
-          >
-            <i id="gear" class="fa fa-gear icons" style="font-size: 26px"></i>
-          </button>
+          <form action="/settings" method="GET">
+            <button
+              id="settings-button"
+              onmouseover="changeClass()"
+              onmouseout="changeBack()"
+              onclick="openMenu()"
+              class="btn"
+            >
+              <i id="gear" class="fa fa-gear icons" style="font-size: 26px"></i>
+            </button>
+          </form>
           <div id="myDropdown" class="dropdown-content">
             <button id="light" class="menu">Light Mode</button>
             <button id="dark" class="menu">Dark Mode</button>
@@ -70,13 +72,13 @@
           <ul>
             <li>
               <form method="get" action="/">
-                <button id="mons" class="icons btn">
-                  Pokemon Inventory
-                </button>
+                <button id="mons" class="icons btn">Pokemon Inventory</button>
               </form>
             </li>
             <li>
-              <button id="items" class="icons btn">Item Inventory</button>
+              <form method="GET" action="/evolution">
+                <button id="items" class="icons btn">Evolution</button>
+              </form>
             </li>
           </ul>
         </div>
@@ -118,10 +120,18 @@
         </div>
       </div>
       <div class="balance">
-        <h2>
-          Balance:
-          <span id="balance">$<%=bal%></span>
-        </h2>
+        <div class="currency">
+          <h2 class="bal">
+            Balance:
+            <span id="balance">$<%=currentBalance.pokecash %></span>
+          </h2>
+          <h2 class="dust opa">
+            Dust: <span id="dust">✧ <%=currentDust.pokedust%></span>
+          </h2>
+        </div>
+        <button id="switch" class="switch">
+          <i class="fa-solid fa-arrows-spin" style="font-size: 24px"></i>
+        </button>
       </div>
     </nav>
     <!-- Mons Roulette -->
@@ -160,10 +170,22 @@
       <button class="buwuton choice" id="bSell">
         Quick Sell<br /><span id="sPrice">($?)</span>
       </button>
-      <button class="buwuton choice" id="bShiny">Spin for Shiny <br />($2)</button></button>
+      <button class="buwuton choice" id="bShiny">
+        Spin for Shiny <br />($2)
+      </button>
     </div>
     <div id="error-message" style="display: none; color: red"></div>
     <script src="/roulette/script.js"></script>
+    <script>
+      const found = "<%= found %>";
+      console.log(found);
+      let src = "/dashboard/basic.png";
+      if (found === "true") {
+        src = "/images/" + "<%= id %>" + ".png";
+      }
+      console.log(src);
+      document.querySelector(".pfp").setAttribute("src", src);
+    </script>
   </body>
 </html>
 <!-- https://img.pokemondb.net/sprites/black-white/shiny/mew.png -->

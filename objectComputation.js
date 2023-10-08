@@ -57,10 +57,6 @@ async function shuffle(array) {
 }
 
 function scheduler() {
-  let now = new Date();
-  let untilMidnight =
-    new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) -
-    now;
   setTimeout(async function () {
     await empty();
     await clear();
