@@ -8,7 +8,7 @@ First full stack application created by me, it is a gatcha game featuring pokemo
 It is a prototype, majority of the features are somewhat completed, major issues you might encounter is CSS code being unpolished, I'm still inexperienced with handling general CSS designs. . .
 Not all the monsters' stats have been added to the database, can be addressed later
 
-##Project ScreenShots
+## Project ScreenShots
 
 #Loggin Screen
 
