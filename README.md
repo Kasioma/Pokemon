@@ -62,9 +62,10 @@ Not all the monsters' stats have been added to the database, can be addressed la
 
 3. Run the schema dump
 
-   [Click here to view the sql file](https://github.com/Kasioma/Pokemon/blob/main/gatchamon%20dump.sql)
+   [Click here to view the sql file](gatchamon-dump.sql)
    
    > **Disclaimer** You might need to change how you connect to the database.
+   > See [queries.js](queries.js)
 
 5. Start the development server
 
